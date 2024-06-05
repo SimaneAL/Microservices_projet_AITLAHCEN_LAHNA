@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/sports")
+@RequestMapping("/sport")
 public class SportController {
     @Autowired
     private SportRepository sportRepository;

@@ -11,20 +11,17 @@ public class Planning {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nom_spectateur")
-    private String nomSpectateur;
-
     @Column(name = "prenom_spectateur")
     private String prenomSpectateur;
 
-    @Column(name = "nom_sport")
-    private String nomSport;
+    @Column(name = "nom_spectateur")
+    private String nomSpectateur;
 
-    @Column(name = "date_sport")
-    private Date dateSport;
 
-    @Column(name = "nom_site")
-    private String nomSite;
+    @Column(name = "id_calendrier")
+    private Long idCalendrier;
+
+
 
     // Getters and Setters
     public Long getId() {
@@ -33,20 +30,6 @@ public class Planning {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-
-
-    public String getNomSport() {
-        return nomSport;
-    }
-
-    public void setNomSport(String nomSport) {
-        this.nomSport = nomSport;
-    }
-
-    public Date getDateSport() {
-        return dateSport;
     }
 
 
@@ -66,10 +49,11 @@ public class Planning {
         this.prenomSpectateur = prenomSpectateur;
     }
 
-    public String getNomSite() {
-        return nomSite;
+    public Long getIdCalendrier() {
+        return idCalendrier;
     }
 
-    public void setNomSite(String nomSite) {
-        this.nomSite = nomSite;
+    public void setIdCalendrier(Long idCalendrier) {
+        this.idCalendrier = idCalendrier;
     }
+}

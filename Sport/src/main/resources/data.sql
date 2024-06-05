@@ -36,13 +36,13 @@ values(10003,'USD','GBP',0.75,0);
 
 
 -- Insertion des données dans la table sport
-INSERT INTO sport (id, nom_sport) VALUES
-                                      (1, 'Athlétisme'),
-                                      (2, 'Natation'),
-                                      (3, 'Gymnastique'),
-                                      (4, 'Basketball'),
-                                      (5, 'Handball'),
-                                      (6, 'Judo'),
-                                      (7, 'Rugby'),
-                                      (8, 'Taekwondo'),
-                                      (9, 'Boxe');
+INSERT INTO sport ( nom_sport) VALUES
+                                      ('Athlétisme'),
+                                      ( 'Natation'),
+                                      ( 'Gymnastique'),
+                                      ( 'Basketball'),
+                                      ( 'Handball'),
+                                      ( 'Judo'),
+                                      ( 'Rugby'),
+                                      ( 'Taekwondo'),
+                                      ( 'Boxe');

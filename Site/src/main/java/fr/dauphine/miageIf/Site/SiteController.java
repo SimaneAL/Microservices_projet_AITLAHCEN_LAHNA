@@ -3,12 +3,14 @@ package fr.dauphine.miageIf.Site;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/sites")
+@RequestMapping("/site")
 public class SiteController {
     @Autowired
     private SiteRepository siteRepository;
@@ -67,5 +69,6 @@ public class SiteController {
             return ResponseEntity.notFound().build();
         }
     }
+
 
 }
