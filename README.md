@@ -1,6 +1,10 @@
 # PROJET Microservices M2IF : Jeux Olympiques 2024
 ## Etudiantes : AIT LAHCEN Simane & LAHNA Inès
 
+### Afin de lancer nos services :
+
+Lancez la classe Application de chaque microservices
+
 ### Afin de tester nos services sur Postman : 
 
 <img width="300" alt="image" src="https://github.com/SimaneAL/Microservices_projet_AITLAHCEN_LAHNA/assets/64166374/f7b627ea-8314-49da-8e09-6c4a1438ccbe"> 
