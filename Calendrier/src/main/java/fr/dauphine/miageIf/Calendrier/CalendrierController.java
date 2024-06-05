@@ -136,8 +136,8 @@ public class CalendrierController {
         }
 
         try {
-            for (Calendrier c : listIdsSports){
-                String urlSports = "http://localhost:8001/sport/id/" +c.getIdSport();
+            for (Calendrier c : listIdsSports) {
+                String urlSports = "http://localhost:8001/sport/id/" + c.getIdSport();
                 Map<String, Object> sportsNoms = restTemplate.getForObject(urlSports, Map.class);
                 if (sportsNoms != null && sportsNoms.containsKey("nomSport")) {
                     sports.add(sportsNoms.get("nomSport").toString());
@@ -153,13 +153,10 @@ public class CalendrierController {
         }
 
         System.out.println(sports);
-       // List<Map<String, Object>> listSports = restTemplate.getForObject(url, List.class);
-return sports;
+        // List<Map<String, Object>> listSports = restTemplate.getForObject(url, List.class);
+        return sports;
 
     }
-
-
-
 
 
     @GetMapping("/sportDansSiteDonne/{nomSport}")
@@ -171,11 +168,11 @@ return sports;
             Map<String, Object> response = restTemplate.getForObject(url, Map.class);
             if (response != null && response.containsKey("id")) {
                 Long idSportRecupere = Long.valueOf(response.get("id").toString());
-                System.out.println("idRecu : " +idSportRecupere);
+                System.out.println("idRecu : " + idSportRecupere);
                 List<Calendrier> list = calendrierRepository.findAllByIdSport(idSportRecupere);
 //                System.out.println(list.get(1).toString());
 //                System.out.println(list.get(2).toString());
-                for (Calendrier c : list){
+                for (Calendrier c : list) {
                     System.out.println(c.getIdSport());
                     sites.add(this.getSiteName(c.getIdSport()));
                 }
@@ -191,56 +188,6 @@ return sports;
         }
     }
 
-
-
-
-//    @GetMapping("/nameSite/id/{id}")
-//    public String getSiteName(@PathVariable Long id) {
-//
-//        String url = "http://localhost:8000/site/id/";
-//        // Effectuez une requête HTTP vers le microservice Site pour récupérer les informations sur le site
-//        Object o = null;
-//        try {
-//            o = restTemplate.getForObject("http://localhost:8000/site/id/" +id , Object.class);
-//        }catch(Exception e){
-//            System.out.println("Lancer le microservice Site !");
-//        }
-//        //System.out.println("http://localhost:8000/site/id/" +id);
-//        // Traitez la réponse
-//        if (o != null) {
-//            return o.toString();
-//        } else {
-//            return "Site not found";
-//        }
-//    }
-
 }
 
 
-
-
-//@GetMapping("/nameSite/id/{id}")
-//public String getSiteName(@PathVariable Long id) {
-//
-//    String url = "http://localhost:8000/site/id/";
-//    // Effectuez une requête HTTP vers le microservice Site pour récupérer les informations sur le site
-//    Object o= null;
-//
-//    try {
-//        o = restTemplate.getForObject("http://localhost:8000/site/id/" +id , Object.class);
-//    }catch(Exception e){
-//        System.out.println("Lancer le microservice Site !");
-//    }
-//
-//    //System.out.println("http://localhost:8000/site/id/" +id);
-//
-//
-//    // Traitez la réponse
-//    if (o != null) {
-//        return o.toString();
-//    } else {
-//        return "Site not found";
-//    }
-//}
-//
-//}

@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 
-// Creation du JPA Repository basé sur Spring Data
 public interface CalendrierRepository extends JpaRepository<Calendrier, Long> {
     List<Calendrier> findCalendrierByDate(Date date);
 
