@@ -1,7 +1,6 @@
 package fr.dauphine.miageIf.Site;
 
 import jakarta.persistence.*;
-// Classe persistente representant un "site"
 @Entity
 @Table(name = "Site")
 public class Site {

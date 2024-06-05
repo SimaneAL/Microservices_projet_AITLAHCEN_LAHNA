@@ -1,7 +1,7 @@
 package fr.dauphine.miageIf.Planning;
 
 import jakarta.persistence.*;
-import java.util.Date;
+
 
 @Entity
 @Table(name = "planning")

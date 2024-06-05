@@ -2,7 +2,6 @@ package fr.dauphine.miageIf.Sport;
 
 import jakarta.persistence.*;
 
-// Classe persistente representant un "sport"
 @Entity
 @Table(name = "Sport")
 public class Sport {

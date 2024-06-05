@@ -1,6 +1,7 @@
 -- Assurez-vous que la séquence d'ID est configurée pour s'incrémenter automatiquement si vous utilisez GenerationType.IDENTITY
 INSERT INTO planning (prenom_spectateur, nom_spectateur, id_calendrier) VALUES
                                                                                                 ('Simane', 'AL', 1 ),
+                                                                                                ('Simane', 'AL', 3 ),
                                                                                                 ('Ines', 'LAHNA', 1),
                                                                                                 ('Hamza', 'Smith', 3),
                                                                                                 ('Bob', 'Marley', 4),

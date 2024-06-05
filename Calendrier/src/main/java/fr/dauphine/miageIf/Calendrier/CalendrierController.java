@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
@@ -64,11 +66,17 @@ public class CalendrierController {
         }
     }
 
-    @GetMapping("/date/{date}")
-    public List<Calendrier> getCalendrierByDate(@PathVariable Long date) {
-        return calendrierRepository.findCalendrierByDate(new Date(date));
+
+    public static Date convertStringToDate(String dateString) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+        return formatter.parse(dateString);
     }
 
+    @GetMapping("/date/{date}")
+    public ResponseEntity<List<Calendrier>> getCalendrierByDate(@PathVariable String date) throws ParseException {
+
+        return ResponseEntity.ok(calendrierRepository.findCalendrierByDate(convertStringToDate(date)));
+    }
 
     @GetMapping("/nameSite/id/{id}")
     public String getSiteName(@PathVariable Long id) {

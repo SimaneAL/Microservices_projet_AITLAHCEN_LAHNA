@@ -1,6 +1,7 @@
 package fr.dauphine.miageIf.Site;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -41,6 +42,7 @@ public class SiteController {
     public Site createSite(@RequestBody Site site) {
         return siteRepository.save(site);
     }
+
 
     // MODIFIER un site existant
     @PutMapping("/id/{id}")

@@ -1,5 +1,6 @@
 package fr.dauphine.miageIf.Calendrier;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import java.util.Date;
 
@@ -17,6 +18,7 @@ public class Calendrier {
     @Column(name = "id_sport")
     private Long idSport;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
     @Column(name = "date")
     private Date date;
 

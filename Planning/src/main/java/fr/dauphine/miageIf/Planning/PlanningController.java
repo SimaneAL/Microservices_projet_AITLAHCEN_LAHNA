@@ -3,8 +3,12 @@ package fr.dauphine.miageIf.Planning;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import java.sql.ClientInfoStatus;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -60,5 +64,14 @@ public class PlanningController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    //recup le planning d un user
+    @GetMapping("/{nomSpectateur}/{prenomSpectateur}")
+    public ResponseEntity<List<Planning>> getPlanningsByNomSpectateurAndAndPrenomSpectateur(@PathVariable String nomSpectateur, @PathVariable String prenomSpectateur){
+        List<Planning> r = this.planningRepository.getPlanningsByNomSpectateurAndAndPrenomSpectateur(nomSpectateur, prenomSpectateur);
+        return ResponseEntity.ok(r);
+
+    }
+
 
 }
