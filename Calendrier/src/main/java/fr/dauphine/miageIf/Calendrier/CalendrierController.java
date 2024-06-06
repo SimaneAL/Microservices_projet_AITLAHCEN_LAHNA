@@ -19,9 +19,6 @@ public class CalendrierController {
     @Autowired
     private CalendrierRepository calendrierRepository;
 
-    @Autowired
-    private RestTemplate restTemplate;
-
     //récupérer/lister,
     @GetMapping("/all")
     public ResponseEntity<List<Calendrier>> getAllSCalendriers() {
@@ -69,12 +66,8 @@ public class CalendrierController {
             String url = "http://localhost:8003/planning/deleteByIdCalendrier/" + id;
 
                 try {
-                    // Create an HttpEntity with no body
                     HttpEntity<Void> requestEntity = new HttpEntity<>(null);
-
-                    // Send the DELETE request
-                    ResponseEntity<Void> response = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, Void.class);
-
+                   restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, Void.class);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                     e.printStackTrace();
@@ -128,7 +121,7 @@ public class CalendrierController {
     //on fait donc appel au microservices sport
     @GetMapping("/nomSportByDate/{date}")
 
-    public ResponseEntity<List<String>> getSportByDate(@PathVariable String date) throws ParseException {
+    public ResponseEntity<List<String>> getSportByDate(@PathVariable String date) {
 
         try {
             //ici list des calendrier a une date donnee
@@ -157,7 +150,7 @@ public class CalendrierController {
     //on fait donc appel au microservices site
     @GetMapping("/nomSiteByDate/{date}")
 
-    public ResponseEntity<List<String>> getSiteByDate(@PathVariable String date) throws ParseException {
+    public ResponseEntity<List<String>> getSiteByDate(@PathVariable String date) {
 
         try {
             //ici list des calendrier a une date donnee
