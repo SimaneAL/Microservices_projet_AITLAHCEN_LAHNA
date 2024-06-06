@@ -10,8 +10,6 @@ import java.util.Optional;
 public interface CalendrierRepository extends JpaRepository<Calendrier, Long> {
     List<Calendrier> findCalendrierByDate(Date date);
 
-    List<Calendrier> findCalendrierByDateAndIdSite(Date date, Long idSite);
-
     List<Calendrier> findCalendrierByDateAfter(Date date);
 
     List<Calendrier> findCalendrierByDateBefore(Date date);

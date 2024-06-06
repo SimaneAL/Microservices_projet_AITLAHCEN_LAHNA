@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -115,10 +116,34 @@ public class CalendrierController {
 
     @GetMapping("/date/{date}")
     public ResponseEntity<List<Calendrier>> getCalendrierByDate(@PathVariable String date) throws ParseException {
-
         return ResponseEntity.ok(calendrierRepository.findCalendrierByDate(convertStringToDate(date)));
     }
 
+    @GetMapping("/nomSportByDate/{date}")
+
+    public ResponseEntity<List<String>> getSportByDate(@PathVariable String date) throws ParseException {
+
+        try {
+            //ici list des calendrier a une date donnee
+            List<Calendrier> evenements = calendrierRepository.findCalendrierByDate(convertStringToDate(date));
+
+            //ici je veux les id des sports dans la liste preced
+            List<Long> sportIds = new ArrayList<>();
+            for (Calendrier evenement : evenements) {
+                sportIds.add(evenement.getIdSport());
+            }
+
+            // here je fais l appel à la methode qui appele le microservice sport
+            List<String> nomsSports = new ArrayList<>();
+            for (Long sportId : sportIds) {
+                String nomSport = getSportsbyId(sportId);
+                nomsSports.add(nomSport);
+            }
+            return ResponseEntity.ok(nomsSports);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
     @GetMapping("/nameSite/id/{id}")
     public String getSiteName(@PathVariable Long id) {
         RestTemplate restTemplate = new RestTemplate();
@@ -137,7 +162,7 @@ public class CalendrierController {
     }
 
     @GetMapping("/nameSport/id/{id}")
-    public String getSitesNameWhereSport(@PathVariable Long id) {
+    public String getSportsbyId(@PathVariable Long id) {
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://localhost:8001/sport/id/" + id;
 
