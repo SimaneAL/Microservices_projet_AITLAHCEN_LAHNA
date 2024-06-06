@@ -2,6 +2,8 @@ package fr.dauphine.miageIf.Site;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -66,6 +68,28 @@ public class SiteController {
         Optional<Site> optionalSite = siteRepository.findById(id);
         if (optionalSite.isPresent()) {
             siteRepository.delete(optionalSite.get());
+            RestTemplate restTemplate = new RestTemplate();
+            String url = "http://localhost:8002/calendrier/deleteByIdSite/" + id;
+            System.out.println("Request URL: " + url);
+
+            try {
+                // Create an HttpEntity with no body
+                HttpEntity<Void> requestEntity = new HttpEntity<>(null);
+
+                // Send the DELETE request
+                ResponseEntity<Void> response = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, Void.class);
+
+                // Check response status code
+                if (response.getStatusCode().is2xxSuccessful()) {
+                    System.out.println("Successfully deleted the calendar entry for site ID: " + id);
+                } else {
+                    System.out.println("Failed to delete the calendar entry, status code: " + response.getStatusCode());
+                }
+
+            } catch (Exception e) {
+                System.out.println("Error during DELETE request to the calendrier microservice: " + e.getMessage());
+                e.printStackTrace();
+            }
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();

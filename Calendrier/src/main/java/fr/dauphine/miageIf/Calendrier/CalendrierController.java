@@ -1,5 +1,6 @@
 package fr.dauphine.miageIf.Calendrier;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -66,6 +67,30 @@ public class CalendrierController {
         }
     }
 
+
+    // Supprimer un calendrier by idSite
+    @Transactional
+    @DeleteMapping("/deleteByIdSite/{siteId}")
+    public ResponseEntity<Void> deletePlanningBySiteId(@PathVariable Long siteId) {
+        List<Calendrier> plannings = calendrierRepository.findByIdSite(siteId);
+        if (plannings.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        calendrierRepository.deleteByIdSite(siteId);
+        return ResponseEntity.noContent().build();
+    }
+
+    // Supprimer un calendrier by isSport
+    @Transactional
+    @DeleteMapping("/deleteByIdSport/{sportId}")
+    public ResponseEntity<Void> deletePlanningBySportId(@PathVariable Long sportId) {
+        List<Calendrier> plannings = calendrierRepository.findByIdSite(sportId);
+        if (plannings.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        calendrierRepository.deleteByIdSport(sportId);
+        return ResponseEntity.noContent().build();
+    }
 
     public static Date convertStringToDate(String dateString) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
