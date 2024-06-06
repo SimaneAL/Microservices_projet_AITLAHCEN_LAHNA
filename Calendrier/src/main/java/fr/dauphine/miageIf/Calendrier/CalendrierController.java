@@ -2,6 +2,8 @@ package fr.dauphine.miageIf.Calendrier;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -57,11 +59,25 @@ public class CalendrierController {
 
     // Supprimer un calendrier by id
     @DeleteMapping("/id/{id}")
-    public ResponseEntity<Void> deleteSite(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCalendrier(@PathVariable Long id) {
         Optional<Calendrier> optionalCalendrier = calendrierRepository.findById(id);
         if (optionalCalendrier.isPresent()) {
             calendrierRepository.delete(optionalCalendrier.get());
-            return ResponseEntity.noContent().build();
+            RestTemplate restTemplate = new RestTemplate();
+            String url = "http://localhost:8003/planning/deleteByIdCalendrier/" + id;
+
+                try {
+                    // Create an HttpEntity with no body
+                    HttpEntity<Void> requestEntity = new HttpEntity<>(null);
+
+                    // Send the DELETE request
+                    ResponseEntity<Void> response = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, Void.class);
+
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                }
+                return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
         }

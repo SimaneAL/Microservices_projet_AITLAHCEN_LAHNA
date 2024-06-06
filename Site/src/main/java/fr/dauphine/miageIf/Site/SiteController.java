@@ -79,15 +79,8 @@ public class SiteController {
                 // Send the DELETE request
                 ResponseEntity<Void> response = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, Void.class);
 
-                // Check response status code
-                if (response.getStatusCode().is2xxSuccessful()) {
-                    System.out.println("Successfully deleted the calendar entry for site ID: " + id);
-                } else {
-                    System.out.println("Failed to delete the calendar entry, status code: " + response.getStatusCode());
-                }
-
             } catch (Exception e) {
-                System.out.println("Error during DELETE request to the calendrier microservice: " + e.getMessage());
+                System.out.println(e.getMessage());
                 e.printStackTrace();
             }
             return ResponseEntity.noContent().build();

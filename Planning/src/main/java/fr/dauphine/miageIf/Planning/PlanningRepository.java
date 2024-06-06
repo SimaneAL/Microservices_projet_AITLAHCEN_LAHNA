@@ -7,5 +7,6 @@ import java.util.List;
 public interface PlanningRepository extends JpaRepository<Planning, Long> {
 
     public List<Planning> getPlanningsByNomSpectateurAndAndPrenomSpectateur(String nomSpectateur, String prenomSpectateur);
-   // public List<Planning> get
+    List<Planning> findByIdCalendrier(Long idCalendrier);
+    void deleteByIdCalendrier(Long idCalendrier);
 }

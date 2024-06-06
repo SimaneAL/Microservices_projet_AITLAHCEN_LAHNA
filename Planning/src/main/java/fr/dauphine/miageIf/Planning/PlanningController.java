@@ -1,5 +1,6 @@
 package fr.dauphine.miageIf.Planning;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,9 +54,9 @@ public class PlanningController {
         }
     }
 
-    // Supprimer un calendrier by id
+    // Supprimer un PLANNING by id
     @DeleteMapping("/id/{id}")
-    public ResponseEntity<Void> deleteSite(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePlanning(@PathVariable Long id) {
         Optional<Planning> optionalCalendrier = planningRepository.findById(id);
         if (optionalCalendrier.isPresent()) {
             planningRepository.delete(optionalCalendrier.get());
@@ -64,6 +65,19 @@ public class PlanningController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    // Supprimer un planning by ifcalendrier
+    @Transactional
+    @DeleteMapping("/deleteByIdCalendrier/{idCalendrier}")
+    public ResponseEntity<Void> deletePlanningByIdCalendrier(@PathVariable Long idCalendrier) {
+        List<Planning> plannings = planningRepository.findByIdCalendrier(idCalendrier);
+        if (plannings.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        planningRepository.deleteByIdCalendrier(idCalendrier);
+        return ResponseEntity.noContent().build();
+    }
+
 
     //recup le planning d un user
     @GetMapping("/{nomSpectateur}/{prenomSpectateur}")
