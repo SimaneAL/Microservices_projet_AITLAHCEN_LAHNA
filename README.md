@@ -43,8 +43,9 @@ Lancez la classe Application de chaque microservices
 5. Supprimer des calendriers en fonction d un id Site/sport donne : http://localhost:8002/calendrier/deleteByIdSport/2 & http://localhost:8002/calendrier/deleteByIdSite/4
 6. Calendrier à une date donnée : http://localhost:8002/calendrier/date/20240622
 
-### Appel de deux microservices :
-1. Nom d un sport dans un calendrier donné : http://localhost:8002/calendrier/nameSport/id/4
-2. nom d un sport dans un site donnné :  http://localhost:8002/calendrier/getSportsDansUnSiteDonne/Gymnase
+### Appels entre différents microservices :
+1. Nom d un sport en fonction de son id : http://localhost:8002/calendrier/nameSport/id/4
+2. nom dun/des sports dans un site donnné :  http://localhost:8002/calendrier/getSportsDansUnSiteDonne/Gymnase
 3. noms des sports à une date donnée : http://localhost:8002/calendrier/nomSportByDate/20240621
 4. noms des sites à une date donnée : http://localhost:8002/calendrier/nomSiteByDate/20240621
+5. noms des sites avec un sport donne : http://localhost:8002/calendrier/siteAvecSportDonne/Natation

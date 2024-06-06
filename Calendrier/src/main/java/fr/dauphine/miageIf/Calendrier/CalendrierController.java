@@ -272,7 +272,7 @@ public class CalendrierController {
     }
 
 
-    @GetMapping("/siteAvecSiteDonne/{nomSport}")
+    @GetMapping("/siteAvecSportDonne/{nomSport}")
     public List<String> getSitesNameAvecSportDonne(@PathVariable String nomSport) {
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://localhost:8001/sport/name/" + nomSport;
