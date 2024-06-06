@@ -18,7 +18,7 @@ public class SiteController {
     @Autowired
     private SiteRepository siteRepository;
 
-    //récupérer/lister,
+    //récupérer/lister tous les sites
     @GetMapping("/all")
     public ResponseEntity<List<Site>> getAllSites() {
         List<Site> sites = siteRepository.findAll();
@@ -30,7 +30,7 @@ public class SiteController {
         return siteRepository.findById(id);
     }
 
-
+    // si y a des espaces dans le nom du site
     //http://localhost:8000/sites/name/Stade%20Olympique
     //les espaces sont pas geres par lapplication
     @GetMapping("/name/{nomSite}")
@@ -46,7 +46,7 @@ public class SiteController {
     }
 
 
-    // MODIFIER un site existant
+    // MODIFIER un site existant avec id
     @PutMapping("/id/{id}")
     public ResponseEntity<Site> updateSite(@PathVariable Long id, @RequestBody Site siteDetails) {
         Optional<Site> optionalSite = siteRepository.findById(id);
@@ -63,22 +63,19 @@ public class SiteController {
     }
 
     // Supprimer un site by id
+    //et donc appel au microservices pour egalement supprimer les events lies a ce site supprime
     @DeleteMapping("/id/{id}")
     public ResponseEntity<Void> deleteSite(@PathVariable Long id) {
         Optional<Site> optionalSite = siteRepository.findById(id);
         if (optionalSite.isPresent()) {
             siteRepository.delete(optionalSite.get());
             RestTemplate restTemplate = new RestTemplate();
+            //ici on fait appel au microservice calendrier pour supprimer les events lies a ce site supprime
             String url = "http://localhost:8002/calendrier/deleteByIdSite/" + id;
             System.out.println("Request URL: " + url);
-
             try {
-                // Create an HttpEntity with no body
                 HttpEntity<Void> requestEntity = new HttpEntity<>(null);
-
-                // Send the DELETE request
                 ResponseEntity<Void> response = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, Void.class);
-
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
