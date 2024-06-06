@@ -1,7 +1,6 @@
 package fr.dauphine.miageIf.Site;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -75,7 +73,7 @@ public class SiteController {
             System.out.println("Request URL: " + url);
             try {
                 HttpEntity<Void> requestEntity = new HttpEntity<>(null);
-                ResponseEntity<Void> response = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, Void.class);
+                restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, Void.class);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
